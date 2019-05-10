@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.jpa.a.Test123;
+import com.example.demo.jpa.b.Test123;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,11 +1,13 @@
 package com.example.demo.jpa.b;
 
 import com.example.demo.service.impl.TestServiceImpl;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 
 /**
  * @author yang chen
@@ -17,10 +19,11 @@ public class Test123 {
     @Resource
     private TestServiceImpl testServiceImpl;
 
-    @RequestMapping("/test123")
+
+
+    @RequestMapping("/test")
     @ResponseBody
     public String sss (){
-
-      return testServiceImpl.getDatabase();
+        return "1234";
     }
 }

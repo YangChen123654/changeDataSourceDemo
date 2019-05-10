@@ -1,9 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.User;
-import com.example.demo.jpa.a.ChangeDataSource;
-import com.example.demo.jpa.b.DynamicSwitchDataSource;
-import com.example.demo.repo.TestRepository;
+import com.example.demo.repo.UserRepository;
 import com.example.demo.service.TestService;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -18,7 +16,7 @@ import java.util.List;
 public class TestServiceImpl implements TestService {
 
     @Resource
-    private TestRepository testRepository;
+    private UserRepository userRepository;
 
     @Resource
     private ApplicationContext applicationContext;
@@ -26,10 +24,10 @@ public class TestServiceImpl implements TestService {
     @Resource
     private DataSourceProperties dataSourceProperties;
 
-    @ChangeDataSource(name = "1")
-    @DynamicSwitchDataSource
+
+
     public String   getDatabase(){
-        List<User> list = testRepository.findAll();
+        List<User> list = userRepository.findAll();
         String dataName = "";
         for (User user:list
              ) {
@@ -47,7 +45,7 @@ public class TestServiceImpl implements TestService {
             user.setId(1L);
             user.setDatabaseName("wma");
             user.setName("yangchen");
-            this.testRepository.save(user);
+//            this.testRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

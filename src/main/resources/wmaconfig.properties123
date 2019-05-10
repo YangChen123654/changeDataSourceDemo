@@ -1,3 +1,15 @@
+spring.datasource.platform=postgres
+spring.datasource.url=jdbc:postgresql://localhost:5432/wma
+spring.datasource.username=postgres
+spring.datasource.password=123654
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.jpa.show-sql = true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+spring.aop.auto=true
+
 wma.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
 wma.hibernate.connection.driver_class = org.postgresql.Driver
 wma.hibernate.ejb.naming_strategy = org.hibernate.cfg.ImprovedNamingStrategy
@@ -17,3 +29,5 @@ wma.maxIdleTime = 60
 wma.acquireIncrement = 3
 wma.maxStatements = 100
 wma.idleConnectionTestPeriod = 60
+
+

@@ -3,7 +3,7 @@ package com.example.demo.jpa.b;
  * @author yang chen
  * @date 2019/4/18 11:03
  */
-public class HandlerDataSource {
+public class DynamicDataSourceContextHolder {
 
     private static ThreadLocal<String> handlerThredLocal = new ThreadLocal<String>();
 

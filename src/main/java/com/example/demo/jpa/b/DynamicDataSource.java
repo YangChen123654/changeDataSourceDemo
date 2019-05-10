@@ -1,9 +1,7 @@
-package com.example.demo.jpa.a;
+package com.example.demo.jpa.b;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -12,15 +10,17 @@ import java.util.Map;
 
 /**
  * @author yang chen
- * @date 2019/4/17 13:23
+ * @date 2019/4/18 11:02
  */
-@Service
+
 public class DynamicDataSource extends AbstractRoutingDataSource {
+
+
 
     // 默认数据源，也就是主库
     protected DataSource masterDataSource;
     // 保存动态创建的数据源
-    private static  Map targetDataSource = new HashMap<>();
+    private static Map targetDataSource = new HashMap<>();
 
     @Override
     protected DataSource determineTargetDataSource() {
@@ -42,7 +42,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected String determineCurrentLookupKey() {
-        String dataSourceName = DynamicDataSourceContextHolder.getDataSourceType();
+        String dataSourceName = DynamicDataSourceContextHolder.getDataSource();
         if (dataSourceName == null || dataSourceName == "default") {
             // 默认的数据源名字
             dataSourceName = "default";
@@ -95,9 +95,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      * @return
      */
     private DataSource getDataSource(String dbtype) {
-        String oriType = DynamicDataSourceContextHolder.getDataSourceType();
+        String oriType = DynamicDataSourceContextHolder.getDataSource();
         // 先切换回主库
-        DynamicDataSourceContextHolder.setDataSourceType("dataSource");
+        DynamicDataSourceContextHolder.putDataSource("dataSource");
 
 
         String url = ""+" id ";
@@ -113,7 +113,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     //创建数据源
     private DataSource createDataSource(String driverClassName, String url,
-                                             String username, String password) {
+                                        String username, String password) {
         DataSource dataSource = new ComboPooledDataSource();
 //        dataSource.setDriverClassName(driverClassName);
 //        dataSource.setUrl(url);
@@ -126,10 +126,10 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     public void setDataSource(String type, DataSource dataSource) {
         this.addTargetDataSource(type, dataSource);
-        DynamicDataSourceContextHolder.setDataSourceType(type);
+        DynamicDataSourceContextHolder.putDataSource(type);
     }
 
-   @Override
+    @Override
     public void setTargetDataSources(Map targetDataSources) {
         // TODO Auto-generated method stub
         super.setTargetDataSources(targetDataSources);
@@ -154,4 +154,5 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     public void setMasterDataSource(DataSource masterDataSource) {
         this.masterDataSource = masterDataSource;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author yang chen
@@ -8,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "tb_user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "id")
